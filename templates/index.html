@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Market Divination</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Top half - Stock Price Tracker -->
+        <div class="top-widget">
+            <h1>Stock Market Divination</h1>
+            <form method="POST">
+                <label for="ticker">Enter Stock Symbol (e.g., AAPL, MSFT): </label>
+                <input type="text" id="ticker" name="ticker" value="{{ ticker or '' }}">
+                <button type="submit">Divine for this Ticker!</button>
+                <button type="submit" name="random_ticker">Let the Deck Decide!</button>
+            </form>
+
+            {% if ticker %}
+                <h2>Stock Data for {{ ticker }}</h2>
+                {% if stock_image %}
+                    <img src="data:image/png;base64,{{ stock_image }}" alt="Stock Price Chart">
+                {% else %}
+                    <p>No data available for the ticker.</p>
+                {% endif %}
+            {% endif %}
+        </div>
+
+        <!-- Bottom half - Tarot Card Readings -->
+        <div class="bottom-widget">
+            <h1>Tarot Slot Machine</h1>
+
+            {% if action_message %}
+                <h2>{{ action_message }}</h2>
+            {% endif %}
+
+            {% if tarot_cards %}
+                <div class="tarot-cards-container">
+                    {% for card in tarot_cards %}
+                        <div class="tarot-card">
+                            <!-- Display the image for the card -->
+                            <img src="{{ url_for('static', filename='images/tarot_cards/' + card.image) }}" alt="Tarot Card Image">
+                            <h3>{{ card.name }}</h3>
+                            <p><strong>Meaning:</strong> {{ card.meaning_up }}</p>
+                            
+                            
+                            
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

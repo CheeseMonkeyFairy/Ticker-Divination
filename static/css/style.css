@@ -1,0 +1,91 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.top-widget, .bottom-widget {
+    flex: 1;
+    padding: 20px;
+}
+
+h1, h2, h3 {
+    color: #333;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+input {
+    padding: 8px;
+    font-size: 16px;
+    margin-right: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+button {
+    padding: 8px 16px;
+    font-size: 16px;
+    border-radius: 4px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.top-widget {
+    text-align: center;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.bottom-widget {
+    background-color: #fff;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.tarot-cards-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.tarot-card {
+    width: 200px;
+    text-align: center;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.tarot-card img {
+    width: 100%;
+    height: auto;
+    margin-top: 10px;
+}
+
+img {
+    width: 100%;
+    max-width: 600px;
+    margin-top: 20px;
+    height: auto;
+}
