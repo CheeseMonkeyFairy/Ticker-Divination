@@ -1,91 +1,154 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
-    margin: 0;
-}
-
-.container {
+    background-color: #3e1c6d;  /* Dark Purple Background */
+    color: white;  /* White Text */
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 100vh;  /* Full viewport height */
 }
 
-.top-widget, .bottom-widget {
-    flex: 1;
+header {
+    text-align: center;
+    background-color: #e0c3fc; /* Lavender background for title */
     padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    color: white;
+    margin-bottom: 20px;  /* Added margin between title bar and the rest of the app */
 }
 
-h1, h2, h3 {
-    color: #333;
+h1 {
+    font-size: 2.5em;
+    color: white;
 }
 
-form {
-    margin-bottom: 20px;
+.content {
+    display: flex;
+    flex-grow: 1;
+    height: 100%;  /* Take up all available height */
+    gap: 20px; /* Added gap to create space between widgets */
 }
 
-input {
+.left-sidebar {
+    width: 20%; /* Takes up 20% of the width */
+    background-color: #e0c3fc; /* Lavender background */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    border: 7px solid #add8e6; /* Increased border by 5px, now 7px light blue border */
+}
+
+.tarot-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.tarot-card {
+    text-align: center;
+}
+
+.tarot-card img {
+    width: 100px;
+    height: auto;
+    border-radius: 8px;
+    border: 5px solid #add8e6; /* Light blue border around tarot card images */
+}
+
+.tarot-card h3 {
+    margin-top: 10px;
+    font-size: 1em;
+    color: white;
+}
+
+.right-section {
+    width: 80%; /* Takes up 80% of the width */
+    padding: 20px;
+    background-color: #e0c3fc; /* Lavender background */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Added gap to create space between widgets */
+    overflow-y: auto;
+    border: 7px solid #add8e6; /* Increased border by 5px, now 7px light blue border */
+}
+
+.input-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.input-form label {
+    font-size: 1.1em;
+    color: white;
+}
+
+.input-form input {
     padding: 8px;
     font-size: 16px;
     margin-right: 10px;
     border-radius: 4px;
     border: 1px solid #ccc;
+    width: 250px;
+    background-color: #fff;
+    color: #333;
 }
 
-button {
+.input-form button {
     padding: 8px 16px;
     font-size: 16px;
     border-radius: 4px;
-    background-color: #4CAF50;
+    background-color: #add8e6; /* Light Blue Button Background */
     color: white;
     border: none;
     cursor: pointer;
+    width: 250px;
 }
 
-button:hover {
-    background-color: #45a049;
+.input-form button:hover {
+    background-color: #9ac8d8; /* Slightly darker light blue on hover */
 }
 
-.top-widget {
+.stock-data,
+.interpretation {
     text-align: center;
-    background-color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.bottom-widget {
-    background-color: #fff;
+    background-color: #6a2e99; /* Purple background for stock data and interpretation */
+    color: white;
     padding: 20px;
-    text-align: center;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    gap: 20px;
-}
-
-.tarot-cards-container {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-}
-
-.tarot-card {
-    width: 200px;
-    text-align: center;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    padding: 10px;
     border-radius: 8px;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    border: 7px solid #add8e6; /* Light blue border around the purple boxes */
 }
 
-.tarot-card img {
-    width: 100%;
-    height: auto;
-    margin-top: 10px;
-}
-
-img {
+.stock-data img {
     width: 100%;
     max-width: 600px;
     margin-top: 20px;
-    height: auto;
+    border: 5px solid #add8e6; /* Light blue border around stock data images */
+}
+
+.interpretation p {
+    font-size: 1.1em;
+}
+
+@media screen and (max-width: 768px) {
+    .content {
+        flex-direction: column;  /* Stack content for smaller screens */
+    }
+
+    .left-sidebar {
+        width: 100%;  /* Full width for small screens */
+    }
+
+    .right-section {
+        width: 100%;  /* Full width for small screens */
+    }
 }

@@ -5,6 +5,7 @@ import io
 import base64
 import random
 from flask import Flask, render_template, request
+from LLM import interpret_tarot_cards  # Import the new function
 
 app = Flask(__name__)
 
@@ -58,9 +59,6 @@ def fetch_random_tarot_cards():
             # Append card details along with the image filename
             tarot_cards.append({
                 'name': card_name,
-                'meaning_up': card['meaning_up'],
-                'meaning_rev': card['meaning_rev'],
-                'desc': card['desc'],
                 'image': image_filename
             })
 
@@ -80,6 +78,7 @@ def index():
     ticker = None
     tarot_cards = None
     action_message = None
+    tarot_interpretation = None  # Variable to store LLM's interpretation
     
     if request.method == "POST":
         # If the "Random Ticker" button is pressed
@@ -95,8 +94,13 @@ def index():
         
         # Fetch 3 random tarot cards and the action message
         tarot_cards, action_message = fetch_random_tarot_cards()
+
+        # Extract the names of the cards for LLM interpretation
+        if tarot_cards:
+            card_names = [card['name'] for card in tarot_cards]
+            tarot_interpretation = interpret_tarot_cards(card_names)  # Get the interpretation from LLM
     
-    return render_template("index.html", stock_image=stock_image, ticker=ticker, tarot_cards=tarot_cards, action_message=action_message)
+    return render_template("index.html", stock_image=stock_image, ticker=ticker, tarot_cards=tarot_cards, action_message=action_message, tarot_interpretation=tarot_interpretation)
 
 if __name__ == "__main__":
     app.run(debug=True)
