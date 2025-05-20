@@ -6,6 +6,7 @@ import base64
 import random
 from flask import Flask, render_template, request
 from LLM import interpret_tarot_cards  # Import the new function
+import os
 
 app = Flask(__name__)
 
@@ -103,4 +104,5 @@ def index():
     return render_template("index.html", stock_image=stock_image, ticker=ticker, tarot_cards=tarot_cards, action_message=action_message, tarot_interpretation=tarot_interpretation)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
