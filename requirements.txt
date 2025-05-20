@@ -1,0 +1,6 @@
+Flask
+requests
+yfinance
+matplotlib
+langchain_ollama
+langchain_core
