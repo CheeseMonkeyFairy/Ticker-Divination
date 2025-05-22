@@ -2,7 +2,7 @@ import requests
 import os
 
 # HARD-CODED API KEY FOR TESTING
-OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")  # Replace with your key
+OPENROUTER_API_KEY = "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"  # Replace with your key
 
 print(f"🔍 Env check: API key found? {'YES' if OPENROUTER_API_KEY else 'NO'}")
 
