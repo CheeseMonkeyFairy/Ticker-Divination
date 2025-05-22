@@ -1,10 +1,15 @@
-import requests
 import os
+import requests
+from dotenv import load_dotenv
 
-# HARD-CODED API KEY FOR TESTING
-OPENROUTER_API_KEY = "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"  # Replace with your key
+load_dotenv()
 
-print(f"🔍 Env check: API key found? {'YES' if OPENROUTER_API_KEY else 'NO'}")
+TOGETHER_API_KEY = os.getenv("TOGETHER_API_KEY")
+
+if not TOGETHER_API_KEY:
+    raise EnvironmentError("❌ Missing TOGETHER_API_KEY in environment variables.")
+else:
+    print("✅ TOGETHER_API_KEY is set:", TOGETHER_API_KEY[:5] + "...")
 
 def interpret_tarot_cards(card_names):
     print("🔮 Received tarot card names:", card_names)
@@ -14,40 +19,28 @@ KEEP YOUR REPLY BRIEF! 2 sentences maximum! In the tone of a fortuneteller, prov
 These cards are being drawn to decide whether or not a particular stock is wise to invest in. Decide if the cards are saying to BUY or SELL the stock.
 You must mention all 3 cards by name.
 """
-    print("📜 Prompt to send:", prompt)
 
     headers = {
-        "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+        "Authorization": f"Bearer {TOGETHER_API_KEY}",
         "Content-Type": "application/json",
-        "HTTP-Referer": "https://yourdomain.com",  # Placeholder
-        "X-Title": "TarotStockPredictor"
     }
 
     body = {
-        "model": "mistralai/devstral-small:free",  # Free and great for chat-style prompts
-        "messages": [
-            {"role": "system", "content": "You are a mystical tarot fortuneteller."},
-            {"role": "user", "content": prompt}
-        ]
+        "model": "mistralai/Mistral-7B-Instruct-v0.2",
+        "prompt": f"You are a mystical tarot fortuneteller.\n{prompt}",
+        "max_tokens": 150,
+        "temperature": 0.7,
+        "top_p": 0.9
     }
 
     try:
-        print("🚀 Sending request to OpenRouter...")
-        response = requests.post("https://openrouter.ai/api/v1/chat/completions", headers=headers, json=body)
-        print("📬 Response received")
+        response = requests.post("https://api.together.xyz/v1/completions", headers=headers, json=body)
         response.raise_for_status()
-
-        content = response.json()['choices'][0]['message']['content'].strip()
-        print("✅ LLM Response:", content)
-        return content
-
+        return response.json()['choices'][0]['text'].strip()
     except requests.exceptions.HTTPError as e:
-        print("❌ HTTP error occurred:", e)
-        print("💬 Response text:", response.text)  # Show raw response
+        print("❌ HTTP error:", e)
+        print("💬 Raw response:", response.text)
         return "An error occurred while interpreting the tarot cards."
-
     except Exception as e:
-        print("❌ Other error occurred:", e)
-        import traceback
-        traceback.print_exc()
+        print("❌ Other error:", e)
         return "An error occurred while interpreting the tarot cards."
