@@ -4,6 +4,8 @@ import os
 # HARD-CODED API KEY FOR TESTING
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")  # Replace with your key
 
+print(f"🔍 Env check: API key found? {'YES' if OPENROUTER_API_KEY else 'NO'}")
+
 def interpret_tarot_cards(card_names):
     print("🔮 Received tarot card names:", card_names)
 
